@@ -1,19 +1,16 @@
 class UsersController < ApplicationController
 
-
-   def index
+  def show
     @items = Item.all
-   end
-    
-
-    def show
-        @user = User.find(params[:id])
-        @items = Item.all 
+    if logged_in?
+      @user = User.find(session[:user_id])
+    else
+      redirect_to login_path
     end
+  end
 
 
 
-    
 end
 
 

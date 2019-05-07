@@ -29,3 +29,7 @@ Item.create(name: Faker::House.furniture, price: Faker::Commerce.price(range = 5
 Item.create(name: Faker::Book.title, price: Faker::Commerce.price(range = 15..50), category_id: 5, vendor_id: Faker::Number.between(1, 5))
 Item.create(name: Faker::Vehicle.make_and_model, price: Faker::Commerce.price(range = 10000..50000), category_id: 2, vendor_id: Faker::Number.between(1, 5))
 end
+
+20.times do
+  Purchase.create(user_id: Faker::Number.between(1, 5), item_id: Faker::Number.between(1, 40))
+end
