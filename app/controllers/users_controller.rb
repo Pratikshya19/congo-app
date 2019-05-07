@@ -2,11 +2,11 @@ class UsersController < ApplicationController
 
   def show
     @items = Item.all
-    if logged_in?
-      @user = User.find(session[:user_id])
-    else
-      redirect_to login_path
-    end
+    #if logged_in?
+      @user = User.find(params[:id])
+    # else
+    #   redirect_to login_path
+    # end
   end
 
 

@@ -1,2 +1,14 @@
-<% @items.each do |item| %>
-    <%= item.name %>
+<h1>Welcome <%= @user.name %></h1>
+
+<br>
+
+<h3>Please consider leaving a review on items you've purchased</h3>
+
+<ul>
+  <% @user.items.uniq.each do |i| %>
+    <li><%= link_to i.name, item_path(i) %>
+  <% end %>
+</ul>
+
+<h3>Suggested items based on your shopping history:</h3>
+  
