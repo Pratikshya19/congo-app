@@ -5,10 +5,14 @@
 <h3>Please consider leaving a review on items you've purchased</h3>
 
 <ul>
-  <% @user.items.uniq.each do |i| %>
-    <li><%= link_to i.name, item_path(i) %>
+  <% @user.items.uniq.each do |item| %>
+    <li><%= link_to item.name, item_path(item) %>
   <% end %>
 </ul>
 
 <h3>Suggested items based on your shopping history:</h3>
-  
+<ul>
+  <% @user.suggested_items[0..4].each do |item| %>
+    <li><%= link_to item.name, item_path(item) %></li>
+  <% end %>
+</ul>
