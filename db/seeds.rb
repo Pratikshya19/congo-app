@@ -12,7 +12,8 @@ Item.destroy_all
 Vendor.destroy_all
 5.times do
     User.create(name: Faker::Name.name, email: Faker::Internet.email, password: "password", address: Faker::Address.full_address, vendor: false)
-  
+    Vendor.create(name: Faker::Company.name, email: Faker::Internet.email, password: "password", vendor: true)
+
 end
 
 Category.create(name:"Electronics")

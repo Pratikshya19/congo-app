@@ -8,11 +8,11 @@ class UsersController < ApplicationController
 
   def show
     @items = Item.all
-    #if logged_in?
+    if logged_in?
       @user = User.find(params[:id])
-    # else
-    #   redirect_to login_path
-    # end
+    else
+      redirect_to login_path
+    end
   end
 
   def new
@@ -21,7 +21,6 @@ class UsersController < ApplicationController
 end
 
 def create
-
    @user = User.new(user_params)
    if @user.valid?
     @user.save
