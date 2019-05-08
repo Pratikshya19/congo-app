@@ -20,4 +20,7 @@ class SessionsController < ApplicationController
         session.delete(:user_id)
         # session[:user_id] = nil
     end
+
+    
+
 end
