@@ -1,17 +1,21 @@
-<h2>WELCOME TO CONGO</h2>
-    
 
-<%= form_for @user do |f| %>
+
+<h2>WELCOME TO CONGO</h2>
+    <%= form_for @user do |f| %>
     <%= f.label :Name %>
     <%= f.text_field :name%>
+    <br>
     <%= f.label :Email%>
-    <%= f.text_field :email%>
-
+    <%= f.text_field :email%><br>
+    <%= f.label :Address %>
+     <%= f.text_field :address %>
+     <br>
     <%= f.label :Password %>
     <%= f.password_field :password %>
+    <br>
     <%= f.label :Vendor %>
     <%= f.radio_button :vendor, 'true' %> Yes
     <%= f.radio_button :vendor, 'false', :checked => true %> No
-   
+    <br>
      <%= f.submit %>
-      <% end %>
+<% end %>
