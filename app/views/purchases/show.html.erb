@@ -1,0 +1,6 @@
+<h1>Item name: <%= @purchase.item.name %></h1>
+<h2>Category: <%= @purchase.item.category.name %></h2>
+<h3> Price: <%= @purchase.item.price %> </h3>
+
+
+<%= button_to "Add a review", "#{@purchase.id}/review", method: :get %>

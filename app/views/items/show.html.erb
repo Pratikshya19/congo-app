@@ -1,3 +1,15 @@
 <h1>Item name: <%= @item.name %></h1>
 <h2>Category: <%= link_to @item.category.name, category_path(@item.category) %></h2>
 <h3> Price: <%= @item.price %> </h3>
+<br>
+<br>
+<br>
+<% if @item.has_reviews? && @item.purchases%>
+<h3>Customer Reviews</h3>
+<ul>
+  <% @item.purchases.each do |p| %>
+    <% next if !p.review %>
+    <li><%= p.review %></li>
+  <% end %>
+</ul>
+<% end %>
