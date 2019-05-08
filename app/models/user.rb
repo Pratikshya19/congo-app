@@ -1,9 +1,10 @@
 class User < ApplicationRecord
+    has_secure_password
     has_many :purchases
     has_many :items, through: :purchases
-validates :name, presence: true
-validates :email, confirmation: true
-validates :password, confirmation: true
+    validates :name, presence: true
+    validates :email, confirmation: true
+    validates :password, confirmation: true
 
 
     def categories
@@ -20,7 +21,11 @@ validates :password, confirmation: true
         self.categories.include?(i.category)
       end
     end
-    
+
+    def has_purchases
+      self.purchases != []
+    end
+
 
 
 end
