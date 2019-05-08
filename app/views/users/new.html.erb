@@ -1,17 +1,17 @@
 <h2>WELCOME TO CONGO</h2>
-    
+
 
 <%= form_for @user do |f| %>
     <%= f.label :Name %>
-    <%= f.text_field :name%>
-    <%= f.label :Email%>
-    <%= f.text_field :email%>
-
-    <%= f.label :Password %>
-    <%= f.password_field :password %>
+    <%= f.text_field :name %>
+    <%= f.label :Address %>
+    <%= f.text_field :address %><br>
+    <%= f.label :Email %>
+    <%= f.text_field :email %><br>
+    <%= f.password_field :password, placeholder: "Password" %>
+    <%= f.password_field :password_confirmation, placeholder: "re-type Password" %>
     <%= f.label :Vendor %>
     <%= f.radio_button :vendor, 'true' %> Yes
     <%= f.radio_button :vendor, 'false', :checked => true %> No
-   
-     <%= f.submit %>
-      <% end %>
+    <%= f.submit %>
+<% end %>
