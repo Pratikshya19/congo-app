@@ -1,16 +1,27 @@
 <h1>Welcome <%= @user.name %></h1>
 
-<br>
 
-<h3>Please consider leaving a review on items you've purchased</h3>
+<% if @user.has_purchases %>
+  <h3>Please consider leaving a review on items you've purchased</h3>
+  <ul>
+    <% @user.purchases.uniq.each do |purchase| %>
+      <li><%= link_to purchase.item.name, purchase_path(purchase) %>
+  </ul>
+  <% end %>
+<% end %>
 
+<% if @user.has_purchases %>
+<h3>Suggested items based on your shopping history:</h3>
 <ul>
-  <% @user.items.uniq.each do |i| %>
-    <li><%= link_to i.name, item_path(i) %>
+  <% @user.suggested_items[0..4].each do |item| %>
+    <li><%= link_to item.name, item_path(item) %></li>
   <% end %>
 </ul>
+<% else %>
+  <% @categories.each do |cat| %>
+    <%= link_to cat.name, category_path(cat) %>
+   <% end %>
+   <% end %>
 
-<h3>Suggested items based on your shopping history:</h3>
 
 <%= link_to "Delete", user_path(@user), :method => :delete, :confirm => "Are you sure you want to delete the user?" %>
-  

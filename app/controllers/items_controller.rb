@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-
+    skip_before_action :authenticated
+    
     def index
         @items = Item.all
         @query = params[:q]
@@ -11,7 +12,6 @@ class ItemsController < ApplicationController
 
     def show
         @item = Item.find(params[:id])
-
     end
 
 def edit

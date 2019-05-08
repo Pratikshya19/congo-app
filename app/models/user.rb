@@ -1,27 +1,31 @@
 class User < ApplicationRecord
+    has_secure_password
     has_many :purchases
     has_many :items, through: :purchases
-validates :name, presence: true
-validates :email, confirmation: true
-validates :password, confirmation: true
+    validates :name, presence: true
+    validates :email, confirmation: true
+    validates :password, confirmation: true
 
 
     def categories
       c = []
-      items.each do |item|
+      self.items.each do |item|
         c << item.category
       end
       c.uniq
     end
 
     def suggested_items
-      items = []
-      Items.all.each do |item|
-        unless item.users.include?(self.id)
-        end
+      Item.all.find_all do |i|
+        next if self.items.include?(i)
+        self.categories.include?(i.category)
       end
     end
-    
+
+    def has_purchases
+      self.purchases != []
+    end
+
 
 
 end

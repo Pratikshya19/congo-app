@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     # skip_before_action :verify_authenticity_token
-
+    skip_before_action :authenticated, only: [:new, :create]
 # def index
 #     @users = User.all
 # end
@@ -8,11 +8,11 @@ class UsersController < ApplicationController
 
   def show
     @items = Item.all
-    #if logged_in?
+    if logged_in?
       @user = User.find(params[:id])
-    # else
-    #   redirect_to login_path
-    # end
+    else
+      redirect_to login_path
+    end
   end
 
   def new
@@ -21,13 +21,12 @@ class UsersController < ApplicationController
 end
 
 def create
-   
    @user = User.new(user_params)
    if @user.valid?
     @user.save
     redirect_to items_path
    else
-    redirect_to new_user_path 
+    redirect_to new_user_path
    end
 end
 
