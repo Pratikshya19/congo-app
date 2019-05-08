@@ -10,7 +10,7 @@ class VendorsController < ApplicationController
     #     return head 
     # end
 
-    
+
     def new
         @item = Item.new
     end
@@ -19,4 +19,6 @@ class VendorsController < ApplicationController
 
     def require_login
         return head(:forbidden) unless session.include? :vendor_id
+end
+
 end
