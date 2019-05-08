@@ -1,0 +1,12 @@
+<h1><%= @purchase.item.name %></h1>
+<h3> $<%= @purchase.item.price %></h3>
+<h3>Category: <%= @purchase.item.category.name %></h3>
+
+
+<div>
+<%= form_for @purchase, method: :patch do |f| %>
+<%= f.label "Write your review:" %><br>
+<%= f.text_area :review %><br>
+<%= f.submit "Add review"%>
+<% end %>
+</div>

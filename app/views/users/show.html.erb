@@ -5,8 +5,8 @@
 <h3>Please consider leaving a review on items you've purchased</h3>
 
 <ul>
-  <% @user.items.uniq.each do |item| %>
-    <li><%= link_to item.name, item_path(item) %>
+  <% @user.purchases.uniq.each do |purchase| %>
+    <li><%= link_to purchase.item.name, purchase_path(purchase) %>
   <% end %>
 </ul>
 
