@@ -9,4 +9,7 @@ class CategoriesController < ApplicationController
         @items = Item.all
     end
 
+
+    
+
 end

@@ -11,8 +11,14 @@
 </ul>
 
 <h3>Suggested items based on your shopping history:</h3>
+
+
+
+
 <ul>
   <% @user.suggested_items[0..4].each do |item| %>
     <li><%= link_to item.name, item_path(item) %></li>
   <% end %>
 </ul>
+<%= link_to "Delete", user_path(@user), :method => :delete, :confirm => "Are you sure you want to delete the user?" %>
+  

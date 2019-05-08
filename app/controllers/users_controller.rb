@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+    # skip_before_action :verify_authenticity_token
+
+# def index
+#     @users = User.all
+# end
+
 
   def show
     @items = Item.all
@@ -9,6 +15,36 @@ class UsersController < ApplicationController
     # end
   end
 
+  def new
+    @user = User.new
+
+end
+
+def create
+   
+   @user = User.new(user_params)
+   if @user.valid?
+    @user.save
+    redirect_to items_path
+   else
+    redirect_to new_user_path 
+   end
+end
+
+def destroy
+ @user = User.find(params[:id])
+  @user.destroy
+  redirect_to items_path
+end
+
+
+
+
+private
+def user_params
+    params.require(:user).permit(:name, :email, :password, :address, :vendor)
+
+end
 
 
 end
@@ -17,6 +53,11 @@ end
 
 
 
+# <form action="/users/id" method="post" target="_blank">
+#   First name: <input type="text" name="fname"><br>
+#   Last name: <input type="text" name="lname"><br>
+#   <input type="submit" value="Submit">
+# </form>
 
 
 
