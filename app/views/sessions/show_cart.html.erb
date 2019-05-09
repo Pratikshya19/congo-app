@@ -1,0 +1,9 @@
+<h1>here's your cart!</h1>
+
+  <% current_cart.each do |num| %>
+  <li> <%= Item.all.find(num).name %><br>Price:<%= Item.all.find(num).price %></li><br>
+    <% @total_price += Item.all.find(num).price %>
+  <% end %>
+
+<h3>Total Price:</h3>
+<h2>$<%= @total_price %></h2>

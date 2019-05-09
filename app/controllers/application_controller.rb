@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticated
   helper_method :current_cart
 
+
   def current_user
     if session[:user_id]
       @user = User.find(session[:user_id])
@@ -20,6 +21,7 @@ class ApplicationController < ActionController::Base
   def current_cart
     session[:cart] ||= []
   end
+
 
 
 end

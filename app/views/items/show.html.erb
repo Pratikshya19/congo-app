@@ -1,13 +1,9 @@
 
 <ul>
 <h1>Item name: <%= @item.name %></h1>
-<h2><li>Category: <%= link_to @item.category.name, category_path(@item.category) %><li></h2>
-
+<h2>Category: <%= link_to @item.category.name, category_path(@item.category) %></h2>
 <h3> Price: <%= @item.price %> </h3>
   <%= form_for @item, method: :post do |f| %>
-      action: 'add_to_cart',
-      method: 'post'}) do %>
-    <input name=product>
     <input type=submit value='add to cart'>
   <% end %>
 <br>

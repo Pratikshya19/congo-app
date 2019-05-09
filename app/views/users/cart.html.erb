@@ -1,6 +1,0 @@
-<%= cart.each do |product| %>
-    <%= product %>
-    <%end%>
-<%= form_tag ({controller: 'items', action: 'cart', method: 'post'}) do %>
-        <%= button_to "Add to cart", :items_path %>
-        <%end%>
