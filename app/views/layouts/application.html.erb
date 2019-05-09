@@ -19,7 +19,7 @@
       </li>
       <% else %>
       <li class="nav-item active">
-        <a class="nav-link" href="/users/#{session[:user_id]}">Visit Profile<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/users/<%="#{session[:user_id]}"%>">Visit Profile<span class="sr-only">(current)</span></a>
       <% end %>
       <% if !session[:user_id] %>
       <li class="nav-item active">

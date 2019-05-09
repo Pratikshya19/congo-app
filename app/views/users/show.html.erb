@@ -1,26 +1,42 @@
 <h1>Welcome <%= @user.name %></h1>
 
-<% if current_user.vendor
-<% if @user.has_purchases %>
+<% if @user.vendor %>
+  <h3>Vendor</h3>
+  <% if @user.vendor_items != [] %>
+  <h1>Items offered by you:</h1>
+    <% @user.vendor_items.each do |item| %>
+      <div><%= button_to "Delete Item", item_path(item), method: :delete %>
+      <%= button_to "Edit Item", item_path(item), method: :patch %>
+      <%= item.name %></div
+    <% end %>
+  <% end %>
+
+  <h3>Offer a new item for sale</h3>
+  <%= form_tag('/items', method: :post) %>
+    <%= label_tag 'Name' %>
+    <%= text_field_tag :name %>
+
+
+
+
+<% elsif @user.has_purchases %>
 <h3>Please consider leaving a review on items you've purchased</h3>
 <ul>
   <%@user.purchases.uniq.each do |purchase|%>
   <li><%= link_to purchase.item.name, purchase_path(purchase) %></li>
 </ul>
-  <% end %>
-<% end %>
-<% if @user.has_purchases %>
 <h3>Suggested items based on your shopping history:</h3>
 <ul>
   <% @user.suggested_items[0..4].each do |item| %>
     <li><%= link_to item.name, item_path(item) %></li>
-  <% end %>
-</ul>
-<% else %>
-  <% Category.all.each do |cat| %>
+    <% end %>
+<% end %>
+    </ul>
+<% elsif %>
+    <% Category.all.each do |cat| %>
     <%= link_to cat.name, category_path(cat) %>
-   <% end %>
-   <% end %><br>
+  <% end %>
+<% end %><br>
 
 
 <%= link_to "Delete User Account", user_path(@user), :method => :delete, :confirm => "Are you sure you want to delete the user?" %>
