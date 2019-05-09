@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
     skip_before_action :authenticated, only: [:new, :create]
 
     def new
-
     end
 
     def create
@@ -18,9 +17,14 @@ class SessionsController < ApplicationController
 
     def destroy
         session.delete(:user_id)
+        session.delete(:cart)
         redirect_to '/'
     end
 
-    
+    def show_cart
+      @total_price = 0.0
+    end
+
+
 
 end

@@ -1,5 +1,14 @@
 <h2>Welcome to Congo</h2>
+<h4>Choose a Category </h4>
 
+
+<% @categories.each do |cat| %>
+   <%= link_to cat.name, category_path(cat) %>
+<% end %>
+<br>
+<br>
+
+<h4>Or search an item below:</h4>
 
 <%= form_tag("/", method: "get") do %>
   <%= label_tag(:q, "Search for:") %>
@@ -18,8 +27,3 @@
   <% end %>
 </ul>
 <% end %>
-
-
-
-   
-     

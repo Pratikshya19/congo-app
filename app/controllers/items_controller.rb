@@ -31,8 +31,8 @@ class ItemsController < ApplicationController
 
   def add_to_cart
       @item = Item.find(params[:id])
-
       current_cart << @item.id
+      render :show
   end
 
   def update
