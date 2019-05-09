@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
     # skip_before_action :verify_authenticity_token
     skip_before_action :authenticated, only: [:new, :create]
-# def index
-#     @users = User.all
-# end
+
 
 
   def show
     @items = Item.all
+    @categories = Category.all
     if logged_in?
       @user = User.find(params[:id])
     else

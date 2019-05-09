@@ -1,4 +1,4 @@
-<h1>Welcome <%= @user.name %></h1>
+<h1>WELCOME <%=  @user.name.upcase! %></h1>
 
 <% if @user.vendor %>
   <h3>Vendor</h3>
@@ -14,9 +14,13 @@
   <h3>Offer a new item for sale</h3>
   <%= form_tag('/items', method: :post) %>
     <%= label_tag 'Name' %>
-    <%= text_field_tag :name %>
-
-
+    <%= text_field_tag :name %><br>
+    <%= label_tag 'price' %>
+    <%= text_field_tag :price %><br>
+    <%= label_tag 'Category' %>
+    <%= select_tag :category_id, options_for_select(@categories.collect{|c| [c.name, c.id]}) %>
+    <br>
+    <%= button_to "SUBMIT", item_path %>
 
 
 <% elsif @user.has_purchases %>
