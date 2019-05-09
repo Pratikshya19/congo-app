@@ -1,14 +1,47 @@
-<h2>Welcome to Congo</h2>
-<h4>Choose a Category </h4>
+
+<div class= "container">
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+      <strong><h2>WELCOME  TO  CONGO</h2><strong>
+    </div>
+    <div class="col-4">
+    </div>
+  </div>
+</div>
 
 
-<% @categories.each do |cat| %>
-   <%= link_to cat.name, category_path(cat) %>
-<% end %>
-<br>
-<br>
+<em><h4>Choose a Category </h4></em>
 
-<h4>Or search an item below:</h4>
+
+
+
+<div class= "container">
+  <div class= "row">
+    <div class= "col">
+      <h4><%= link_to "Electronics", "/categories/1" %></h4>
+    </div>
+    <div class= "col">
+    <h4><%= link_to "Vehicle", "/categories/2" %></h4>
+    </div>
+    <div class= "col">
+    <h4><%= link_to "Home", "/categories/3" %></h4>
+    </div>
+    <div class= "col">
+    <h4><%= link_to "appliances", "/categories/4" %></h4>
+    </div>
+    <div class= "col">
+    <h4><%= link_to "books", "/categories/5" %></h4>
+    </div>
+  </div>
+</div>
+<br> <br>
+
+
+
+
+<h4>Or Search an Item below:</h4>
 
 <%= form_tag("/", method: "get") do %>
   <%= label_tag(:q, "Search for:") %>

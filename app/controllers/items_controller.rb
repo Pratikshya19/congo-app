@@ -22,9 +22,12 @@ end
     def create
         
 @item= Item.new(item_params)
-@item = Item.valid?
+if @item = Item.valid?
 @item.save
-redirect_to item_path(@item)
+redirect_to user_path(@item)
+else
+    redirect_to user_path
+end
 end
 
 
@@ -47,8 +50,8 @@ end
 
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    @item = Item.find(params[:id])
+    @item.destroy
     redirect_to items_path
   end
 
@@ -57,7 +60,7 @@ end
   private
 
     def item_params
-      params.require(:item).permit(:name, :price, :category_id, :image_url)
+      params.require(:item).permit(:name, :price, :category_id, :image_url, :vendor_id, user_id)
     end
 
 
