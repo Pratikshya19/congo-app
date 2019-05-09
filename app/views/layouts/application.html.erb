@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CongoApp</title>
+  
+    <title>CONGO</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,8 +10,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Congo</a>
+  
+
+
+
+
+
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+  <a class="navbar-brand" href="/">CONGO</a>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if !session[:user_id] %>
@@ -28,7 +38,9 @@
       <% end %>
       <% if session[:user_id] %>
         <li class="nav-item">
+        <div class="topnav-right">
         <a class="nav-link" href="/logout">Logout</a>
+        </div>
         </li>
       <% end %>
       <% if session[:cart] %>
@@ -36,10 +48,22 @@
         <a class="nav-link" href="/cart">Cart <%="#{session[:cart].count}" %></a>
         </li>
       <% end %>
+
     </ul>
   </div>
 </nav>
-
+<style>
+  body {
+    
+ background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+ background-color: #cccccc;
+ background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+}
+    background-color: #93B874;
+  }
+  </style>
 
   <body>
 
