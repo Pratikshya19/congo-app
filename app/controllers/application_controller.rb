@@ -22,6 +22,9 @@ class ApplicationController < ActionController::Base
     session[:cart] ||= []
   end
 
+  def counted_items
+    counted_items = current_cart.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+  end
 
 
 end

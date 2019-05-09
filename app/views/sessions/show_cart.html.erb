@@ -1,9 +1,18 @@
 <h1>here's your cart!</h1>
+<% counted_items = current_cart.inject(Hash.new(0)) { |h,v| h[v] += 1; h } %>
 
-  <% current_cart.each do |num| %>
-  <li> <%= Item.all.find(num).name %><br>Price:<%= Item.all.find(num).price %></li><br>
-    <% @total_price += Item.all.find(num).price %>
+  <% current_cart.uniq.each do |num| %>
+  <li> <%= Item.all.find(num).name %> Quantity: <%= counted_items[num] %>
+  <br>Price:<%= Item.all.find(num).price * counted_items[num] %></li>
+  <br><% @total_price += (Item.all.find(num).price * counted_items[num]) %>
   <% end %>
+
+
+  <%= counted_items %>
 
 <h3>Total Price:</h3>
 <h2>$<%= @total_price %></h2>
+
+<%= form_tag('/purchases', method: :post)%>
+<% #i might have to  wrap the whole list of cart in this form %>
+  <input type=submit value='place order'>

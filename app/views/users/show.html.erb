@@ -26,8 +26,13 @@
 <% elsif @user.has_purchases %>
 <h3>Please consider leaving a review on items you've purchased</h3>
 <ul>
-  <%@user.purchases.uniq.each do |purchase|%>
-  <li><%= link_to purchase.item.name, purchase_path(purchase) %></li>
+  <% unique_items = [] %>
+  <% @user.purchases.each do |p| %>
+    <% unique_items << p.item %>
+  <% end %>
+
+  <% unique_items.each do |item|%>
+  <li><%= link_to item.name, purchase_path(@user.purchases.find(@user.id)) %></li>
 </ul>
 <h3>Suggested items based on your shopping history:</h3>
 <ul>
