@@ -5,9 +5,11 @@
   <% if @user.vendor_items != [] %>
   <h1>Items offered by you:</h1>
     <% @user.vendor_items.each do |item| %>
-      <div><%= button_to "Delete Item", item_path(item), method: :delete %>
-      <%= button_to "Edit Item", item_path(item), method: :patch %>
-      <%= item.name %></div>
+      <div><h3><%= item.name %></h3>
+        <h4>Category:<%= item.category.name %></h4>
+        <h4>Price:<%= item.price %></h4>
+        <%= button_to "Delete Item", item_path(item), method: :delete %>
+      </div><br>
     <% end %>
   <% end %>
 
@@ -42,7 +44,7 @@
     </ul>
 <% end %>
 
-<% if !@user.has_purchases %>
+<% if !@user.has_purchases && !@user.vendor %>
   <h3>Shop by category. Follow the links below!</h3>
   <h4>
   <% Category.all.each do |cat| %>

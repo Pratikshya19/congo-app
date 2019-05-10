@@ -4,8 +4,10 @@
 <h1>Item name: <%= @item.name %></h1>
 <h2>Category: <%= link_to @item.category.name, category_path(@item.category) %></h2>
 <h3> Price: <%= @item.price %> </h3>
+  <% if !current_user.vendor %>
   <%= form_for @item, method: :post do |f| %>
     <input type=submit value='add to cart'>
+  <% end %>
   <% end %>
 <br>
 <br>

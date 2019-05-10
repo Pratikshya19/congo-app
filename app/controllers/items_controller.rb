@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
     skip_before_action :authenticated
-
+    skip_before_action :verify_authenticity_token
     def index
       @items = Item.all
       # @order_item = current_order.order_items.new
@@ -14,21 +14,22 @@ class ItemsController < ApplicationController
     def show
         @item = Item.find(params[:id])
     end
-def new
-    @item = Item.new
-end
+
+    def new
+        @item = Item.new
+    end
 
 
     def create
-        
-@item= Item.new(item_params)
-if @item = Item.valid?
-@item.save
-redirect_to user_path(@item)
-else
-    redirect_to user_path
-end
-end
+      @item= Item.new(name: params[:name], price: params[:price], category_id: params[:category_id])
+      @item.vendor_id = current_user.id
+      if @item.valid?
+      @item.save
+      redirect_to user_path(@item.vendor_id)
+      else
+      redirect_to user_path
+      end
+    end
 
 
 
@@ -41,7 +42,8 @@ end
   def add_to_cart
       @item = Item.find(params[:id])
       current_cart << @item.id
-      render :show
+      render :index
+
   end
 
   def update
@@ -52,7 +54,7 @@ end
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
-    redirect_to items_path
+    redirect_to user_path(@item.vendor_id)
   end
 
 
@@ -60,7 +62,7 @@ end
   private
 
     def item_params
-      params.require(:item).permit(:name, :price, :category_id, :image_url, :vendor_id, user_id)
+      params.require(:item).permit(:name, :price, :category_id)
     end
 
 

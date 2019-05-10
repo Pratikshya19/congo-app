@@ -33,9 +33,34 @@ class User < ApplicationRecord
     end
 
     def vendor_items
-      Item.all.find_all {|item| item.vendor_id == self.id}
+      array = Item.all.find_all {|item| item.vendor_id == self.id}
+      array.sort_by {|item| item.category}
     end
 
 
 
 end
+
+
+
+
+
+
+
+
+# you can add items to the cart without being logged in
+# and then if you log in as a vendor you can make purchases
+# we don't want vendors to be able to make purchases
+
+# we need to make the vendors be able to edit items
+
+# we want to be able to remove or reduce the number of items in the cart
+
+
+
+
+
+
+
+
+#
