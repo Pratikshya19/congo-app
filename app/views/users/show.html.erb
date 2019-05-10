@@ -2,7 +2,6 @@
 
 <% if @user.vendor %>
 <h1>WELCOME VENDOR <%=  @user.name.upcase! %></h1>
-
   <% if @user.vendor_items != [] %>
   <h1>Items offered by you:</h1>
     <% @user.vendor_items.each do |item| %>
@@ -22,32 +21,35 @@
     <%= select_tag :category_id, options_for_select(@categories.collect{|c| [c.name, c.id]}) %>
     <br>
     <%= button_to "SUBMIT", item_path %>
-
-
-<% elsif @user.has_purchases %>
-<h3>Please consider leaving a review on items you've purchased</h3>
-<ul>
-  <% items = [] %>
-  <% @user.purchases.each do |p| %>
-    <% items << p.item %>
-  <% end %>
-
-  <% unique_items.uniq.each do |item|%>
-
-  <li><%= link_to item.name, purchase_path(@user.purchases.find_by(user_id: "#{@user.id}")) %></li>
-</ul>
-<h3>Suggested items based on your shopping history:</h3>
-<ul>
-  <% @user.suggested_items[0..4].each do |item| %>
-    <li><%= link_to item.name, item_path(item) %></li>
-    <% end %>
 <% end %>
+
+
+<% if @user.has_items_without_review? %>
+  <h3>Please consider leaving a review on items you've purchased</h3>
+    <ul>
+      <% @user.items.uniq.each do |item|%>
+        <% next if item.purchases.any? {|p| p.review && p.user_id == @user.id} %>
+      <li><%= link_to item.name, purchase_path(item.purchases.find_by(user_id: "#{@user.id}")) %></li>
+      <% end %>
     </ul>
-<% elsif %>
-    <% Category.all.each do |cat| %>
+<% end %>
+<% if @user.has_purchases %>
+  <h3>Suggested items based on your shopping history:</h3>
+    <ul>
+      <% @user.suggested_items.sample(5).each do |item| %>
+        <li><%= link_to item.name, item_path(item) %></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<% if !@user.has_purchases %>
+  <h3>Shop by category. Follow the links below!</h3>
+  <h4>
+  <% Category.all.each do |cat| %>
     <%= link_to cat.name, category_path(cat) %>
-  <% end %>
-<% end %><br>
+  <% end %></h4>
+<% end %>
+<br>
 
 
 <%= link_to "Delete User Account", user_path(@user), :method => :delete, :confirm => "Are you sure you want to delete the user?" %>

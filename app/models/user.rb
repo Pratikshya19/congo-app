@@ -26,6 +26,12 @@ class User < ApplicationRecord
       self.purchases != []
     end
 
+    def has_items_without_review?
+      self.items.uniq.any? do |i|
+        !i.purchases.any? {|p| p.review && p.user_id == self.id}
+      end
+    end
+
     def vendor_items
       Item.all.find_all {|item| item.vendor_id == self.id}
     end
