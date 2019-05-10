@@ -12,7 +12,7 @@ class PurchasesController < ApplicationController
     def update
       @purchase = Purchase.find(params[:id])
       @purchase.update(review: params[:purchase][:review])
-      redirect_to item_path(@purchase.item)
+      redirect_to user_path(@purchase.user)
     end
 
     def create

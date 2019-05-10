@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticated
   helper_method :current_cart
+  helper_method :current_user
 
 
   def current_user
