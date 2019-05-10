@@ -2,7 +2,7 @@
 
 <% if @user.vendor %>
 <h1>WELCOME VENDOR <%=  @user.name.upcase! %></h1>
-  
+
   <% if @user.vendor_items != [] %>
   <h1>Items offered by you:</h1>
     <% @user.vendor_items.each do |item| %>
@@ -27,13 +27,14 @@
 <% elsif @user.has_purchases %>
 <h3>Please consider leaving a review on items you've purchased</h3>
 <ul>
-  <% unique_items = [] %>
+  <% items = [] %>
   <% @user.purchases.each do |p| %>
-    <% unique_items << p.item %>
+    <% items << p.item %>
   <% end %>
 
-  <% unique_items.each do |item|%>
-  <li><%= link_to item.name, purchase_path(@user.purchases.find(@user.id)) %></li>
+  <% unique_items.uniq.each do |item|%>
+
+  <li><%= link_to item.name, purchase_path(@user.purchases.find_by(user_id: "#{@user.id}")) %></li>
 </ul>
 <h3>Suggested items based on your shopping history:</h3>
 <ul>
